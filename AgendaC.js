@@ -26,8 +26,7 @@ console.log("- existeContacto() = Indica si el contacto existe")
 console.log("- listarContactos() = Lista todos los contactos")
 console.log("- buscarContacto() = Busca un contacto")
 console.log("- eliminarContacto() = Elimina el contacto de la agenda")
-console.log("- agendaLlena() = Indica si la agenda está llena")
-console.log("- huecosLibres() = Indica cuántos contactos más podemos ingresar")
+console.log("- agendaLibre() = Indica cuántos contactos más podemos ingresar")
 console.log("=================")
 
 
@@ -71,8 +70,14 @@ function añadirContacto(contact,num){
     contactoss.push(new Contacto(contact,num))
     localStorage.setItem(`contactoss`,JSON.stringify(contactoss))
     cantidad--
-    }else{console.log("Supero el limite,no se pueden agregar mas contactos")}  
-}
+    if(cantidad){
+        console.log("La agenda no esta llena")
+        console.log("-------------------------")
+        agendaLibre()
+    }else{
+        console.log("la agenda esta llena")
+    }  
+}}
 
 function existeContacto(){
     let buscarUser=prompt("Ingrese el contacto").toLocaleLowerCase()
@@ -128,20 +133,7 @@ function deleteContact(){
     }
 }
 
-function agendaLlena(){
-    if(cantidad){
-        console.log("La agenda no esta llena")
-        console.log("-------------------------")
-        contactoss.forEach(function(contacto){
-            console.log(`Contacto:${contacto.contact}`)
-            console.log(`Numero:${contacto.num}`)
-            console.log("-------------------------")
-            
-        })
-    }else{
-        console.log("la agenda esta llena")
-    }
-}
+
 
 function agendaLibre(){
     if(cantidad){
